@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connection</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+HR+Lijeva:wght@100..400&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+        <h1>ENI - MEMORY - Se connecter</h1>
+        <nav>
+            <a href="../index.html" alt="Accueil">Accueil</a>
+            <a href="./inscription.html" alt="S'inscrire">S'inscrire</a>
+            <a href="./connection.html" alt="Se connecter">Se connecter</a>
+            <!-- <a href="./profil.html" alt="Profil">Profil</a>
+            <a href="./jeu.html" alt="Jouer">Jouer</a> -->
+            <!-- target="_blank" -->
+        </nav>
+    </header>
+
+    <main>
+        <form action="">
+            <fieldset id="formConnection">
+                <legend>Connectez-vous.</legend>
+
+                <label for="email">Entrez votre email</label>
+                <div class="champ">
+                    <input type="email" name="email" id="email" placeholder="Votre email">
+                </div>
+                
+
+                <label for="mdp">Mot de passe</label>
+                <div class="champ">
+                    <input type="password" name="mdp" id="mdp" placeholder="Votre mot de passe">
+                </div>
+                
+
+                <div class="champ">
+                    <input type="reset" id= "reinitialiser" value="Annuler">
+                    <input type="submit" id="soumettre" value="Se connecter">
+                </div>
+
+            </fieldset>
+        </form>
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <script type="module" src="../js/connection.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+</body>
+</html>

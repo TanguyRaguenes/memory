@@ -4,9 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memory</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+HR+Lijeva:wght@100..400&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <h1>Test</h1>
     
+    <header>
+        <h1>ENI - MEMORY - Accueil</h1>
+        <nav>
+            <a href="./index.html" alt="Accueil">Accueil</a>
+            <a href="./pages/inscription.html" alt="S'inscrire">S'inscrire</a>
+            <a href="./pages/connection.html" alt="Se connecter">Se connecter</a>
+            <!-- <a href="./pages/profil.html" alt="Profil">Profil</a>
+            <a href="./pages/jeu.html" alt="Jouer">Jouer</a> -->
+            <!-- target="_blank" -->
+        </nav>
+    </header>
+
+    <main>
+
+        <div>
+            <p>
+                Bienvenue sur le site du Memory de l'ENI !<br>
+                Venez jouer avec nous et faites le meilleur score possible.
+            </p>
+            
+            <h2>Règles du jeu :</h2>
+
+            <div id="containerListe">
+
+                <ul>
+                    <li>Retourner deux cartes. Si les images sont identiques, le jeu laisse les cartes visibles.</li>
+                    <li>Si les sont différentes, les cartes se retournent faces cachées là où elles étaient.</li>
+                    <li>La partie est terminée lorsque toutes les cartes ont été assemblées par paires.</li>
+                </ul>
+
+            </div>
+
+
+            <div id="containerImgExemple">
+                <img src="./images/memory-legumes/memory_detail_legumes.png" alt="Exemple jeu Memory">
+            </div>
+            
+
+            <p>
+                Si vous voulez vous souvenir de votre score. Inscrivez-vous via le formulaire.<br>
+                Le jeu garde les <b>5 meilleurs</b> scores.<br>
+                Si vous voulez relancer une partie cliquer sur <b>la barre espace</b>.
+            </p>
+
+        </div>
+        
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <script type="module" src="./js/app.js"></script>
 </body>
 </html>

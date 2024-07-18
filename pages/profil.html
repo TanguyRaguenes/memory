@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+HR+Lijeva:wght@100..400&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+        <h1 id="bienvenue">Profil</h1>
+        <nav>
+            <a href="../index.html" alt="Accueil">Accueil</a>
+            <a href="./inscription.html" alt="S'inscrire">S'inscrire</a>
+            <a href="./connection.html" alt="Se connecter">Se connecter</a>
+            <a href="./profil.html" alt="Profil">Profil</a>
+            <a href="./jeu.html" alt="Jouer">Jouer</a>
+            <!-- target="_blank" -->
+        </nav>
+    </header>
+    <main>
+
+
+        <div class="infos">        
+            <p>Voici votre nom d'utilisateur :</p>
+            <p id="pNom">nom</p>
+        </div>
+
+        <div class="infos"> 
+            <p>Voici votre email :</p>
+            <p id="pEmail">email</p> 
+        </div>
+
+
+        <div class="infos" style="visibility: hidden;">
+            <p>Voici votre mot de passe :</p>
+            <p id="pMdp">mdp</p>
+        </div>
+
+
+
+        <form  action="">
+
+            <fieldset id="containerSelectionTailleGrille">
+
+                <div>
+                    <label for="grille4x3">grille 4x3</label>
+                    <input class="btnRadio" type="radio" name="selectionTailleGrille" id="grille4x3" value="grille4x3"  checked>
+                </div>
+                <div>
+                    <label for="grille6x5"> grille 6x5</label>
+                    <input class="btnRadio" type="radio" name="selectionTailleGrille" id="grille6x5" value="grille6x5">
+                </div>
+                <div>
+                    <label for="grille8x7">grille 8x6</label>
+                    <input class="btnRadio" type="radio" name="selectionTailleGrille" id="grille8x7" value="grille8x7">
+                </div>
+                
+
+            </fieldset>
+
+        </form>
+
+        <select name="choixMemory" id="choixMemory">
+            <option id="selectionLegumes" value="legumes">légumes</option>
+            <option id="selectionAnimaux" value="animaux">animaux</option>
+            <option id="selectionAnimauxAnimes" value="animaux-animes">animaux animés</option>
+            <option id="selectionAnimauxDomestiques" value="animaux-domestiques">animaux domestiques</option>
+            <option id="selectionChiens" value="chiens">chiens</option>
+            <option id="selectionDinosauresNommes"value="dinosaures-nommes">dinosaures</option>
+        </select>
+
+        <div id="containerImgExemple">
+            <img id="imgExemple" src="../images/memory-legumes/memory_detail_legumes.png" alt="">
+        </div>
+
+
+        <table id="tbScore">
+            <thead>
+                <tr>
+                    <th>Memory</th>
+                    <th>Grille</th>
+                    <th>Utilisateur</th>
+                    <th>date</th>
+                    <th>nombre tentatives</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            </tbody>
+            <tfoot>
+
+            </tfoot>
+        </table>
+        
+
+    </main>
+    <footer>
+
+    </footer>
+
+    <script type="module" src="../js/profil.js"></script>
+</body>
+</html>

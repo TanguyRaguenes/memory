@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+HR+Lijeva:wght@100..400&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+        <h1>ENI - MEMORY - S'inscrire</h1>
+        <nav>
+            <a href="../index.html" alt="Accueil">Accueil</a>
+            <a href="./inscription.html" alt="S'inscrire">S'inscrire</a>
+            <a href="./connection.html" alt="Se connecter">Se connecter</a>
+            <!-- <a href="./profil.html" alt="Profil">Profil</a>
+            <a href="./jeu.html" alt="Jouer">Jouer</a> -->
+            <!-- target="_blank" -->
+        </nav>
+    </header>
+
+    <main>
+        <form action="">
+            <fieldset id="formInscription">
+                <legend>Inscrivez-vous.</legend>
+
+                <label for="nom">Nom utilisateur</label>
+                <div class="champ">
+                    <input type="text" name="nom" id="nom" placeholder="3 caractères minimum">
+                    <div class="icones">
+                        <img id="iconeNom" src="../images/error.svg" alt="">
+                    </div>
+
+                </div>
+
+                <label for="email">Entrez votre email</label>
+                <div class="champ">
+                    <input type="email" name="email" id="email" placeholder="Votre email">
+                    <div class="icones">
+                        <img id="iconeEmail" src="../images/error.svg" alt="">
+                    </div>
+                </div>
+
+                <label for="mdp">Mot de passe</label>
+                <p id="consigneMdp">Au moins un symbole, un chiffre, ainsi que 6 caractères minimum.</p>
+                <div class="champ">
+                    <input type="password" name="mdp" id="mdp" placeholder="Votre mot de passe">
+                    <div class="icones">
+                        <img id="iconeEmail" src="../images/error.svg" alt="" style="visibility: hidden;">
+                    </div>
+                </div>
+
+                <div id="containerTestMdp">
+                    <div id ="divMdpFaible" style="visibility: hidden;">Faible</div>
+                    <div id ="divMdpMoyen" style="visibility: hidden;">Moyen</div>
+                    <div id ="divMdpFort" style="visibility: hidden;">Fort</div>
+                </div>
+
+                <label for="mdpValidation">Confirmez le mot de passe</label>
+                <div class="champ">
+                    <input type="password" name="mdpValidation" id="mdpValidation" placeholder="Confirmer le mot de passe">
+                    <div class="icones">
+                        <img id="iconeMdp" src="../images/error.svg" alt="">
+                    </div>
+                    
+                </div>
+
+                <div class="champ">
+                    
+                    <input type="reset" id= "reinitialiser" value="Annuler">
+                    <input type="submit" id="soumettre" value="Création du compte">
+                    
+                </div>
+
+            </fieldset>
+        </form>
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <script type="module" src="../js/inscription.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+
+</body>
+</html>
