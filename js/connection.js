@@ -4,20 +4,24 @@ const saisieMdp = document.getElementById("mdp")
 let nomUtilisateur=""
 
 soumettre.addEventListener("click",e=>{
+
     e.preventDefault()
     console.log("click")
 
-    const data = localStorage.getItem("comptes")
-    const dataExploitable = JSON.parse(data)
+    const data = JSON.parse(localStorage.getItem("comptes"))
 
     let occurence=false
-    dataExploitable.forEach(e => {
+    
+    if(data!=null){
+        data.forEach(e => {
 
             if(e.email==saisieEmail.value && e.mdp==md5(saisieMdp.value)){
                 occurence=true
                 nomUtilisateur=e.nom
             }
-    });
+    })
+    }
+
 
     if(occurence){
         alert("Bienvenue !")

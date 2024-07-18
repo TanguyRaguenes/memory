@@ -52,13 +52,8 @@ saisieMdpValidation.addEventListener("keydown", ()=>{
 })
 
 btnEnvoi.addEventListener("click", (e)=>{
-    e.preventDefault();
-    console.log("Envoi formulaire")
 
-    // console.log("ctrlNom : " + ctrlNom(saisieNom.value))
-    // console.log("ctrlEmail : " + ctrlEmail(saisieEmail.value))
-    // console.log("ctrlMdp : " + ctrlMdp(saisieMdp.value))
-    // console.log("ctrlMdpValidation : " + ctrlMdpValidation(saisieMdpValidation.value))
+    e.preventDefault();
 
     if (ctrlNom(saisieNom.value)==null) {
         alert("Le nom saisi n'est pas valide !")
@@ -73,8 +68,6 @@ btnEnvoi.addEventListener("click", (e)=>{
         alert("Les deux mots de passe ne sont pas similaires !")
         vibrer()
     }else{
-        // alert("Tout est ok !")
-
 
         stockerDonnees(saisieNom.value, saisieEmail.value, md5(saisieMdp.value))
 
@@ -84,11 +77,7 @@ btnEnvoi.addEventListener("click", (e)=>{
 
 function stockerDonnees(nom, email, mdp){
 
-    const data = localStorage.getItem("comptes")
-    const dataExploitable = JSON.parse(data)
-
-    // console.log("dataExploitable :")
-    // console.log(dataExploitable)
+    const data = JSON.parse(localStorage.getItem("comptes"))
 
     const compte = {"nom" : nom, "email" : email, "mdp" : mdp}
 
@@ -97,9 +86,9 @@ function stockerDonnees(nom, email, mdp){
 
     let warning=false
 
-    if(dataExploitable!=null){
+    if(data!=null){
 
-        dataExploitable.forEach(e => {
+        data.forEach(e => {
 
             if(e.email==compte.email){
                 warning=true
@@ -123,10 +112,12 @@ function stockerDonnees(nom, email, mdp){
         const tableauToString = JSON.stringify(tableau)
         localStorage.setItem("comptes", tableauToString)
 
+        alert("Votre compte a bien été créé !")
+
         window.location.assign("../pages/connection.html")
 
     }else{
-        alert("Vous avez déjà un compte !")
+        alert("Ce compte existe déjà.")
     }
 
 }

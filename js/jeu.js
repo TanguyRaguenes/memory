@@ -7,6 +7,11 @@ let compteur=0
 
 let tbImages=[]
 
+const quitter=document.getElementById("quitter")
+
+quitter.addEventListener("click",()=>{
+    window.location.assign("../index.html")
+})
 
 alimenterTbImages()
 
@@ -48,12 +53,17 @@ function alimenterTbScores(){
 
     const tableau=[]
 
-    scores.forEach(e => {
-        console.log(e.memory)
-        if(e.memory==memory && e.grille==grille){
-            tableau.push(e)
-        }
-    });
+    if(scores!=null){
+
+        scores.forEach(e => {
+            console.log(e.memory)
+            if(e.memory==memory && e.grille==grille){
+                tableau.push(e)
+            }
+        });
+
+    }
+
 
     tableau.sort((a,b)=>a.nbTentatives-b.nbTentatives)
     console.log(tableau)
@@ -135,26 +145,26 @@ function genererElementsGrille(){
 
 function dimensionnerCartes(carte, dimension){
 
-    switch (dimension) {
+    // switch (dimension) {
 
-        case "grille4x3":
-            carte.style.width="18vw"
-            carte.style.height="13vh"
-            break;
+    //     case "grille4x3":
+    //         carte.style.width="18vw"
+    //         carte.style.height="13vh"
+    //         break;
 
-        case "grille6x5":
-            carte.style.width="12vw"
-            carte.style.height="7vh"
-            break;
+    //     case "grille6x5":
+    //         carte.style.width="12vw"
+    //         carte.style.height="7vh"
+    //         break;
 
-        case "grille8x7":
-            carte.style.width="9vw"
-            carte.style.height="4.4vh"
-            break;
+    //     case "grille8x7":
+    //         carte.style.width="9vw"
+    //         carte.style.height="4.4vh"
+    //         break;
     
-        default:
-            break;
-    }
+    //     default:
+    //         break;
+    // }
 
 }
 
@@ -293,11 +303,13 @@ function recupererCible(e){
     if(tbSelections.length==2){
 
         const nbTentatives = document.getElementById("nbTentatives")
-        compteur++
-        nbTentatives.innerText=compteur
+
 
 
         setTimeout(()=>{
+
+            compteur++
+            nbTentatives.innerText=compteur
 
 
             if(tbSelections[0].children[1].children[0].src==tbSelections[1].children[1].children[0].src){
@@ -305,8 +317,8 @@ function recupererCible(e){
                 nbOccurences ++
     
                 if(nbOccurences==grille.children.length/2){
-                    alert("Victoire !")
 
+                    alert("Victoire !")
 
                     const utilisateur = sessionStorage.getItem("utilisateur")
                     const grille = JSON.parse(localStorage.getItem("prefTailleGrille")).id
@@ -323,9 +335,6 @@ function recupererCible(e){
 
                     }
 
-                    console.log("__________________________________")
-
-                    // console.log(score)
 
                     const scores=[]
                     scores.push(score)
@@ -338,10 +347,9 @@ function recupererCible(e){
                     }
            
                     
-                    // console.log(scores)
-
-
                     localStorage.setItem("scores",JSON.stringify(scores))
+
+                    alimenterTbScores()
 
 
                 }

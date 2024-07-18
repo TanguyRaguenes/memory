@@ -151,26 +151,31 @@ const btnRadio=document.querySelectorAll(".btnRadio")
 
 
 
+const quitter=document.getElementById("quitter")
+
+quitter.addEventListener("click",()=>{
+    window.location.assign("../index.html")
+})
+
 if(localStorage.getItem("prefMemory")==null){
     
     localStorage.setItem("prefMemory","legumes")
 
 }else{
 
-    const data = localStorage.getItem("prefMemory")
-    const dataExploitable = JSON.parse(data)
-    imgExemple.src=dataExploitable.exemple
+    imgExemple.src=localStorage.getItem("prefMemory").exemple
     
 }
 
 
 if(localStorage.getItem("prefTailleGrille")==null){
     
-    prefTailleGrille={
+    const prefTailleGrille={
         "id" : "grille4x3",
         "colonnes" : 4,
         "lignes" : 3,
     }
+
     const prefTailleGrilleStringify = JSON.stringify(prefTailleGrille)
     localStorage.setItem("prefTailleGrille", prefTailleGrilleStringify)
 
@@ -187,6 +192,11 @@ if(localStorage.getItem("prefTailleGrille")==null){
 
     filtrerMemory(dataExploitable.id)
 }
+
+setTimeout(() => {
+    recupererInformations()
+}, 50);
+
 
 
 function filtrerMemory(tailleGrille){
@@ -305,18 +315,18 @@ function determinerBtnSelectionne(){
 
 }
 
-recupererInformations()
-
 function recupererInformations(){
+
+    console.log("recupererInformations")
 
     const utilisateur=sessionStorage.getItem("utilisateur")
 
-    const data = localStorage.getItem("comptes")
-    const dataExploitable = JSON.parse(data)
-    // console.log(dataExploitable)
+    const data = JSON.parse(localStorage.getItem("comptes"))
 
-    dataExploitable.forEach(e => {
-        if(e.nom = utilisateur){
+    data.forEach(e => {
+
+        if(e.nom == utilisateur){
+            console.log("dans boucle")
             nom=e.nom
             email=e.email
             mdp=e.mdp
@@ -329,7 +339,6 @@ function recupererInformations(){
     pEmail.innerText=email
     pMdp.innerText=mdp
     
-
 }
 
 
@@ -352,40 +361,34 @@ function afficherExemple(){
 
 function afficherScore(){
 
-    console.log("___________________________________________")
-
     const data = JSON.parse(localStorage.getItem("scores"))
 
     const tbScore = document.getElementById("tbScore")
+
+    const dataFiltree =[]
+    
+    data.forEach(e => {
+        if(e.utilisateur==sessionStorage.getItem("utilisateur")){
+            dataFiltree.push(e)
+        }
+    } )
     
 
-    if (data!=null){
+    if (dataFiltree!=null){
 
-        
-        for (let i = 0; i < 5; i++) {
+        let iterations = 0
+        dataFiltree.length>=5?iterations=5:iterations=dataFiltree.length
 
-            if(data[i].utilisateur==sessionStorage.getItem("utilisateur"))
+        for (let i = 0; i < iterations; i++) {
 
-            if(data[i]!=null){
-                tbScore.children[1].children[i].children[0].innerText = data[i].memory
-                tbScore.children[1].children[i].children[1].innerText = data[i].grille
-                tbScore.children[1].children[i].children[2].innerText = data[i].utilisateur
-                tbScore.children[1].children[i].children[3].innerText = data[i].date
-                tbScore.children[1].children[i].children[4].innerText = data[i].nbTentatives
-            }else{
-                tbScore.children[1].children[i].children[0].innerText = "-"
-                tbScore.children[1].children[i].children[1].innerText = "-"
-                tbScore.children[1].children[i].children[2].innerText = "-"
-                tbScore.children[1].children[i].children[3].innerText = "-"
-                tbScore.children[1].children[i].children[4].innerText = "-"
-            }
-
-            
-        }
+            tbScore.children[1].children[i].children[0].innerText = dataFiltree[i].memory
+            tbScore.children[1].children[i].children[1].innerText = dataFiltree[i].grille
+            tbScore.children[1].children[i].children[2].innerText = dataFiltree[i].utilisateur
+            tbScore.children[1].children[i].children[3].innerText = dataFiltree[i].date
+            tbScore.children[1].children[i].children[4].innerText = dataFiltree[i].nbTentatives
   
-            
+        }
+       
     }
-
-    console.log("___________________________________________")
 
 }
