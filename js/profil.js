@@ -159,17 +159,32 @@ quitter.addEventListener("click",()=>{
 
 if(localStorage.getItem("prefMemory")==null){
     
-    localStorage.setItem("prefMemory","legumes")
+    console.log("defaut prefMemory")
+    const data = {
+        nom: "legumes",
+        exemple:"../images/memory-legumes/memory_detail_legumes.png",
+        images:[
+            "../images/memory-legumes/1.svg",
+            "../images/memory-legumes/2.svg",
+            "../images/memory-legumes/3.svg",
+            "../images/memory-legumes/4.svg",
+            "../images/memory-legumes/5.svg",
+            "../images/memory-legumes/6.svg",
+        ]
+    }
+    localStorage.setItem("prefMemory",JSON.stringify(data))
 
 }else{
 
-    imgExemple.src=localStorage.getItem("prefMemory").exemple
+    imgExemple.src=JSON.parse(localStorage.getItem("prefMemory")).exemple
+    console.log("A :" + JSON.parse(localStorage.getItem("prefMemory")).exemple)
     
 }
 
 
 if(localStorage.getItem("prefTailleGrille")==null){
     
+    console.log("defaut grille")
     const prefTailleGrille={
         "id" : "grille4x3",
         "colonnes" : 4,
@@ -181,16 +196,17 @@ if(localStorage.getItem("prefTailleGrille")==null){
 
 }else{
 
-    const data = localStorage.getItem("prefTailleGrille")
-    const dataExploitable = JSON.parse(data)
+    console.log("grille trouvé !")
+    const data = JSON.parse(localStorage.getItem("prefTailleGrille"))
     
     btnRadio.forEach(e => {
-        if(e.id==dataExploitable .id){
+        if(e.id==data.id){
             e.checked=true
         }
     });
 
-    filtrerMemory(dataExploitable.id)
+    console.log("B : " + data.id)
+    filtrerMemory(data.id)
 }
 
 setTimeout(() => {
@@ -323,15 +339,21 @@ function recupererInformations(){
 
     const data = JSON.parse(localStorage.getItem("comptes"))
 
-    data.forEach(e => {
+    if(data!=null){
 
-        if(e.nom == utilisateur){
-            console.log("dans boucle")
-            nom=e.nom
-            email=e.email
-            mdp=e.mdp
-        }
-    })
+        data.forEach(e => {
+
+            if(e.nom == utilisateur){
+                console.log("dans boucle")
+                nom=e.nom
+                email=e.email
+                mdp=e.mdp
+            }
+        })
+
+    }
+
+
 
     pNom.innerText=nom
     const bienvenue = document.getElementById("bienvenue")
@@ -347,10 +369,14 @@ choixMemory.addEventListener("change",afficherExemple)
 function afficherExemple(){
 
     tbMemory.forEach(e => {
+
         if(e.nom==choixMemory.value){
+
+
             imgExemple.src=e.exemple
 
             const prefMemory = JSON.stringify(e)
+
             localStorage.setItem("prefMemory", prefMemory)
 
         }
@@ -366,14 +392,17 @@ function afficherScore(){
     const tbScore = document.getElementById("tbScore")
 
     const dataFiltree =[]
-    
-    data.forEach(e => {
-        if(e.utilisateur==sessionStorage.getItem("utilisateur")){
-            dataFiltree.push(e)
-        }
-    } )
-    
 
+    if(data!=null){
+
+        data.forEach(e => {
+            if(e.utilisateur==sessionStorage.getItem("utilisateur")){
+                dataFiltree.push(e)
+            }
+        } )
+
+    }
+    
     if (dataFiltree!=null){
 
         let iterations = 0
