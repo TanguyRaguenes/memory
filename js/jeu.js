@@ -7,11 +7,59 @@ let compteur=0
 
 let tbImages=[]
 
+const nbTentatives = document.getElementById("nbTentatives")
+
 const quitter=document.getElementById("quitter")
 
 quitter.addEventListener("click",()=>{
     window.location.assign("../index.html")
 })
+
+function toggleBoiteDeDialogue(){
+
+    const boiteDeDialogue = document.getElementById("boiteDeDialogue")
+    const main= document.querySelector("main")
+    
+    if(boiteDeDialogue.style.display=="block"){
+
+        console.log("masquer")
+        main.style.filter="none"
+        main.style.pointerEvents="auto"
+
+        boiteDeDialogue.style.display="none"
+        
+
+    }else{
+
+        console.log("afficher")
+        main.style.filter="blur(5px)"
+        main.style.pointerEvents="none"
+
+        boiteDeDialogue.style.display="block"
+        // boiteDeDialogue.style.pointerEvents="auto"
+        // boiteDeDialogue.style.filter="none"
+
+    }
+    
+
+}
+
+const boiteDeDialogueFermer = document.getElementById("boiteDeDialogueFermer")
+
+
+boiteDeDialogueFermer.addEventListener("click",()=>{
+
+    toggleBoiteDeDialogue()
+
+})
+
+
+
+
+
+
+// ***INITIALISATION***
+// ______________________________________________________
 
 alimenterTbImages()
 
@@ -26,83 +74,14 @@ function alimenterTbImages(){
 
 }
 
-
-
-// ***INITIALISATION***
-// ______________________________________________________
-
 const grille = document.getElementById("grille")
-
-
 genererElementsGrille()
-
-reinitialiserJeu()
-
-alimenterTbScores()
-
-function alimenterTbScores(){
-
-    const scores = JSON.parse(localStorage.getItem("scores"))
-    console.log(scores)
-    const memory = JSON.parse(localStorage.getItem("prefMemory")).nom
-    console.log(memory)
-    const grille = JSON.parse(localStorage.getItem("prefTailleGrille")).id
-    console.log(grille)
-
-    console.log("***************************")
-
-    const tableau=[]
-
-    if(scores!=null){
-
-        scores.forEach(e => {
-            console.log(e.memory)
-            if(e.memory==memory && e.grille==grille){
-                tableau.push(e)
-            }
-        });
-
-    }
-
-
-    tableau.sort((a,b)=>a.nbTentatives-b.nbTentatives)
-    console.log(tableau)
-
-    
-
-        
-    for (let i = 0; i < 5; i++) {
-
-        if(tableau[i]!=null){
-            tbScore.children[1].children[i].children[0].innerText = tableau[i].memory
-            tbScore.children[1].children[i].children[1].innerText = tableau[i].grille
-            tbScore.children[1].children[i].children[2].innerText = tableau[i].utilisateur
-            tbScore.children[1].children[i].children[3].innerText = tableau[i].date
-            tbScore.children[1].children[i].children[4].innerText = tableau[i].nbTentatives
-        }else{
-            tbScore.children[1].children[i].children[0].innerText = "-"
-            tbScore.children[1].children[i].children[1].innerText = "-"
-            tbScore.children[1].children[i].children[2].innerText = "-"
-            tbScore.children[1].children[i].children[3].innerText = "-"
-            tbScore.children[1].children[i].children[4].innerText = "-"
-        }
-
-        
-    }
-  
-            
-    
-
-
-}
 
 function genererElementsGrille(){
 
-    const data=localStorage.getItem("prefTailleGrille")
-    const dataExploitable=JSON.parse(data)
-    // console.log(dataExploitable)
-    const lignes = dataExploitable.lignes
-    const colonnes = dataExploitable.colonnes
+    const data=JSON.parse(localStorage.getItem("prefTailleGrille"))
+    const lignes = data.lignes
+    const colonnes = data.colonnes
     const nbCases = lignes*colonnes
 
     const grille = document.getElementById("grille")
@@ -118,7 +97,7 @@ function genererElementsGrille(){
                 <img  src='../images/question.svg' alt=''>
             </div>
             <div class='arriere retourner'>
-                <img src='' alt=''>
+                <img id='img${i}'src='' alt=''>
             </div>
         </div>
         `
@@ -126,47 +105,9 @@ function genererElementsGrille(){
         
     }
 
-    const avant = document.querySelectorAll(".avant")
-    const arriere = document.querySelectorAll(".arriere")
-
-    avant.forEach(e=> {
-
-        dimensionnerCartes(e,dataExploitable.id)
-
-    });
-
-    arriere.forEach(e=> {
-        dimensionnerCartes(e,dataExploitable.id)
-    });
-
- 
-
 }
 
-function dimensionnerCartes(carte, dimension){
-
-    // switch (dimension) {
-
-    //     case "grille4x3":
-    //         carte.style.width="18vw"
-    //         carte.style.height="13vh"
-    //         break;
-
-    //     case "grille6x5":
-    //         carte.style.width="12vw"
-    //         carte.style.height="7vh"
-    //         break;
-
-    //     case "grille8x7":
-    //         carte.style.width="9vw"
-    //         carte.style.height="4.4vh"
-    //         break;
-    
-    //     default:
-    //         break;
-    // }
-
-}
+reinitialiserJeu()
 
 function reinitialiserJeu(){
 
@@ -175,12 +116,15 @@ function reinitialiserJeu(){
     tbTirages=[]
     tbFinal=[]
 
+    nbTentatives.innerText=compteur
+
     
     definirPositionImages()
 
     for(let i=0 ; i<grille.children.length; i++){
         grille.children[i].children[0].classList.remove("retourner")
         grille.children[i].children[1].classList.add("retourner")
+        grille.children[i].style.pointerEvents="auto"
     }
 
     setTimeout(()=>{
@@ -228,14 +172,10 @@ function definirPositionImages(){
         
     }
 
-    // console.log(tbTirages)
-
     for (let i= 0; i < tbTirages.length; i++) {
         
         tbFinal[i]=tbImages[tbTirages[i]] 
     }
-
-    // console.log(tbFinal)
 
 }
 
@@ -259,6 +199,53 @@ function compterOccurences(valeur, tableau){
 
 }
 
+
+// ***GESTION SCORE***
+
+alimenterTbScores()
+
+function alimenterTbScores(){
+
+    const scores = JSON.parse(localStorage.getItem("scores"))
+    const memory = JSON.parse(localStorage.getItem("prefMemory")).nom
+    const grille = JSON.parse(localStorage.getItem("prefTailleGrille")).id
+
+    const tableau=[]
+
+    if(scores!=null){
+
+        scores.forEach(e => {
+            if(e.memory==memory && e.grille==grille){
+                tableau.push(e)
+            }
+        });
+
+    }
+
+
+    tableau.sort((a,b)=>a.nbTentatives-b.nbTentatives)
+        
+    for (let i = 0; i < 5; i++) {
+
+        if(tableau[i]!=null){
+            tbScore.children[1].children[i].children[0].innerText = tableau[i].memory
+            tbScore.children[1].children[i].children[1].innerText = tableau[i].grille
+            tbScore.children[1].children[i].children[2].innerText = tableau[i].utilisateur
+            tbScore.children[1].children[i].children[3].innerText = tableau[i].date
+            tbScore.children[1].children[i].children[4].innerText = tableau[i].nbTentatives
+        }else{
+            tbScore.children[1].children[i].children[0].innerText = "-"
+            tbScore.children[1].children[i].children[1].innerText = "-"
+            tbScore.children[1].children[i].children[2].innerText = "-"
+            tbScore.children[1].children[i].children[3].innerText = "-"
+            tbScore.children[1].children[i].children[4].innerText = "-"
+        }
+
+        
+    }
+  
+}
+
 // ***GESTION FRAPPE***
 // ______________________________________________________
 
@@ -269,11 +256,15 @@ function recupererFrappe(e){
     console.log(e.key)
     if(e.key==" "){
         
-        alert("Nouvelle partie !")
+        // alert("Nouvelle partie !")
+
         reinitialiserJeu()
 
     }
 }
+
+
+
 
 // ***GESTION CLIC SUR IMAGES***
 // ______________________________________________________
@@ -297,28 +288,33 @@ function recupererCible(e){
         tbSelections.push(e.target.parentElement.parentElement)
     }
     
-
-    // console.log(tbSelections)
-
     if(tbSelections.length==2){
 
-        const nbTentatives = document.getElementById("nbTentatives")
-
-
-
+        
         setTimeout(()=>{
 
             compteur++
             nbTentatives.innerText=compteur
 
+            console.log("1°________________________")
+            console.log(tbSelections[0].children[1].children[0])
 
-            if(tbSelections[0].children[1].children[0].src==tbSelections[1].children[1].children[0].src){
-            
+            console.log("2°________________________")
+            console.log(tbSelections[1].children[1].children[0])
+
+
+            if(tbSelections[0].children[1].children[0].src==tbSelections[1].children[1].children[0].src && tbSelections[0].children[1].children[0].id != tbSelections[1].children[1].children[0].id){
+
                 nbOccurences ++
+
+
+                tbSelections[0].style.pointerEvents="none"
+                tbSelections[1].style.pointerEvents="none"
     
                 if(nbOccurences==grille.children.length/2){
 
-                    alert("Victoire !")
+                    // alert("Victoire !")
+                    toggleBoiteDeDialogue()
 
                     const utilisateur = sessionStorage.getItem("utilisateur")
                     const grille = JSON.parse(localStorage.getItem("prefTailleGrille")).id
@@ -364,8 +360,6 @@ function recupererCible(e){
                 });
 
             }
-
-
 
             tbSelections=[]
         },1000)

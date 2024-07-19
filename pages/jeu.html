@@ -9,7 +9,9 @@
 
 </head>
 <body>
+
     <header>
+
         <input id="quitter" type="button" value="Quitter">
         <h1>Jeu</h1>
         <nav>
@@ -20,10 +22,22 @@
             <a href="./jeu.html" alt="Jouer">Jouer</a>
             <!-- target="_blank" -->
         </nav>
+        <div id="boiteDeDialogue" style="display: none;">
+
+            <div id = "boiteDeDialogueImg" >
+                <img src="../images/bravo.gif" alt="">
+            </div>
+            
+            <div id = "boiteDeDialogueInput">
+                <input id="boiteDeDialogueFermer" type="button" value="Fermer">
+            </div>
+            
+        </div>
     </header>
+
     <main>
         <div id="containerNbTentatives"><p>Nombre de tentatives : </p><p id="nbTentatives">0</p></div>
-        
+        <p id="rejouer">cliquer sur la touche espace pour rejouer.</p>
         
         
         <div id="grille">
